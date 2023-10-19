@@ -42,30 +42,8 @@ class DisSession(BaseSession):
 
     @classmethod
     def download_models(cls, *args, **kwargs):
-        """
-        Downloads the pre-trained model file.
+        return "u2net/isnet-general-use.onnx"
 
-        This class method downloads the pre-trained model file from a specified URL using the pooch library.
-
-        Parameters:
-            args: Additional positional arguments.
-            kwargs: Additional keyword arguments.
-
-        Returns:
-            str: The path to the downloaded model file.
-        """
-        fname = f"{cls.name(*args, **kwargs)}.onnx"
-        pooch.retrieve(
-            "https://github.com/danielgatis/rembg/releases/download/v0.0.0/isnet-general-use.onnx",
-            None
-            if cls.checksum_disabled(*args, **kwargs)
-            else "md5:fc16ebd8b0c10d971d3513d564d01e29",
-            fname=fname,
-            path=cls.u2net_home(*args, **kwargs),
-            progressbar=True,
-        )
-
-        return os.path.join(cls.u2net_home(*args, **kwargs), fname)
 
     @classmethod
     def name(cls, *args, **kwargs):
